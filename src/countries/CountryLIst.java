@@ -6,7 +6,6 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,19 +15,43 @@ import java.util.stream.Collectors;
 
 
 public class CountryLIst extends JFrame {
+    /** The label to display instructions. */
+    private JLabel label;
+    /** The button to trigger file reading. */
+    private JButton button;
+    /** The list to display the file contents. */
+    private JList<String> list;
+
+
+    /** The top panel containing the label. */
+    private JPanel topPanel;
+    /** The center panel containing the button. */
+    private JPanel centerPanel;
+    /** The bottom panel. */
+    private JPanel bottomPanel;
+
+// constructor to build GUI upon instantiation
+    public CountryLIst() {
+
+        setLayout(new BorderLayout());
+
+        topPanel = new JPanel();
+        centerPanel = new JPanel();
+
+        // Create the label
+        label = new JLabel("Click the button to display the file contents");
+
+        // Create the button
+        button = new JButton("Read File and Display Contents");
+      // add Action listener here
+
+    }// end of constructor
 
 
 
 
 
 
-
-    /**
-     * Reads the contents of a file and returns them as a list of strings.
-     *
-     * @param file The file to read.
-     * @return A list of strings, where each string is a line from the file.
-     */
     public Map<String, String>  readFile(File file ) {
         Map<String, String> countryMap = new HashMap<>();
         String filePath = "resources"+File.separator+"countries-and-capitals.txt";
@@ -47,7 +70,11 @@ public class CountryLIst extends JFrame {
                 if(parts.length == 2) {
                     String key = parts[0].trim();
                     String value = parts[1].trim();
-                    countryMap.put(key, value);
+                    if (key.isBlank() || value.isBlank()) {
+                        System.out.println("Ignoring entry with blank country or capital: " + oneLine);
+                    } else {
+                        countryMap.put(key, value);
+                    }
                 } else { System.out.println("Ignoring malformed line: " + oneLine);}
 
             }
@@ -67,6 +94,7 @@ public class CountryLIst extends JFrame {
     
      public List<String> getCountryAndCapitalList(Map<String, String> countryAndCapitalMap){
         return countryAndCapitalMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
                 .map(entry -> entry.getKey() + " : " + entry.getValue())
                 .collect(Collectors.toList());
      }// end of getCountryAndCapitalList
