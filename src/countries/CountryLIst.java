@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 
 
 
@@ -61,6 +63,16 @@ public class CountryLIst extends JFrame {
 
 
         return countryMap;  }// end of readFile
+    
+    
+     public List<String> getCountryAndCapitalList(Map<String, String> countryAndCapitalMap){
+        return countryAndCapitalMap.entrySet().stream()
+                .map(entry -> entry.getKey() + " : " + entry.getValue())
+                .collect(Collectors.toList());
+     }// end of getCountryAndCapitalList
 
+                           
+
+    
 
 }// end of class
