@@ -1,3 +1,5 @@
+import countries.CountryLIst;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,7 +50,10 @@ public class Main {
 
 
     }// end of doSearches()
-    public static void displayCountryList(){System.out.println("1.Countries and Capitals");}
+    public static void displayCountryList(){
+        System.out.println("1.Countries and Capitals");
+        CountryLIst countryList= new CountryLIst();
+        }
     public static void processCountries(){System.out.println("2.Countries Info");}
     public static void allCountriesThatStartWith(){System.out.println("3.All Countries that start with");}
 
