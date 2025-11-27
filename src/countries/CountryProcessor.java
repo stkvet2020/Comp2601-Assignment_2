@@ -11,11 +11,23 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-
+/**
+ * Processes a collection of countries and their capitals, providing various operations
+ * such as counting countries, finding the longest capital city name, and filtering countries.
+ * The data is loaded from a file upon instantiation.
+ * @author stephan knappstein A01208242
+ * @version 1.0
+ */
 public class CountryProcessor  {
 
     private Map<String, String> countryAndCapitalMap;
 
+    /**
+     * Constructs a CountryProcessor and initializes the map of countries and capitals
+     * by reading from a predefined file.
+     *
+     * @throws IllegalStateException if the loaded map is null or empty.
+     */
     public CountryProcessor() {
         // The readFile method in CountryLIst is now static, so we can call it directly.
         // We still need to pass a File object, but its path is not used.
@@ -36,39 +48,47 @@ public class CountryProcessor  {
         return map != null && !map.isEmpty();
     }
 
-// printNumberOfCountries
+    /**
+     * Prints the total number of countries loaded into the map.
+     */
     public void printNumberOfCountries() {
         int numberOfCountries = countryAndCapitalMap.size();
         System.out.println("Number of countries: " + numberOfCountries);
-    }// end of printNumberOfCountries
+    }
 
-    /*public List<String> getCountryAndCapitalList(Map<String, String> countryAndCapitalMap){
-        return countryAndCapitalMap.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
-                .map(entry -> entry.getKey() + " : " + entry.getValue())
-                .collect(Collectors.toList());
-     }/ */
+    /**
+     * Finds and prints the capital city with the longest name.
+     * If no capitals are found, it prints a corresponding message.
+     */
     public void printLongestCapitalCity(){
         String longestCapital = countryAndCapitalMap.values().stream()
                 .max(Comparator.comparingInt(String::length))
                 .orElse("No capital cities found.");
         System.out.println("Longest capital city: " + longestCapital);
-    }// end of method
+    }
 
-
+    /**
+     * Finds and prints the country with the shortest name.
+     * If no countries are found, it does nothing.
+     */
     public void printShortestCountryName(){
         countryAndCapitalMap.keySet().stream()
                 .min(Comparator.comparingInt(String::length))
                 .ifPresent(shortestCountry -> System.out.println("Shortest country name: " + shortestCountry));
-    }// end of method
+    }
 
+    /**
+     * Prints all countries that start with a given letter, case-insensitively.
+     *
+     * @param letter The starting letter to filter countries by.
+     */
    public void printAllCountriesThatStartWith(String letter){
         List<String> matchingCountries = countryAndCapitalMap.keySet().stream()
                 .filter(country -> country.toLowerCase().startsWith(letter.toLowerCase()))
                 .collect(Collectors.toList());
 
         matchingCountries.forEach(System.out::println);
-   }// end of method
+   }
 
 
 
