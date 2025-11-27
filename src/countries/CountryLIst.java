@@ -80,11 +80,12 @@ public class CountryLIst extends JFrame {
     /**
      * Reads a file containing countries and their capitals, separated by a comma.
      * It validates the data to ensure that neither the country nor the capital is blank.
+     * This method is static as it does not depend on any instance-specific data of the CountryLIst class.
      *
-     * @param file The file to read from.
+     * @param file The file to read from. (Note: The file path is hardcoded internally, so this parameter is not strictly used for the file path.)
      * @return A map where the key is the country and the value is the capital.
      */
-    public Map<String, String>  readFile(File file ) {
+    public static Map<String, String>  readFile(File file ) {
         Map<String, String> countryMap = new HashMap<>();
         String filePath = "resources"+File.separator+"countries-and-capitals.txt";
          file = new File(filePath);

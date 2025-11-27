@@ -1,4 +1,5 @@
 import countries.CountryLIst;
+import countries.CountryProcessor;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -54,8 +55,26 @@ public class Main {
         System.out.println("1.Countries and Capitals");
         CountryLIst countryList= new CountryLIst();
         }
-    public static void processCountries(){System.out.println("2.Countries Info");}
-    public static void allCountriesThatStartWith(){System.out.println("3.All Countries that start with");}
+    public static void processCountries(){
+        System.out.println("2.Countries Info");
+        CountryProcessor countryProcessor = new CountryProcessor();
+        System.out.println("===========================");
+        countryProcessor.printNumberOfCountries();
+        System.out.println("===========================");
+        countryProcessor.printLongestCapitalCity();
+        System.out.println("===========================");
+        countryProcessor.printShortestCountryName();
+        System.out.println("===========================\n");
+    }
+    public static void allCountriesThatStartWith(){System.out.println("3.Please input letter to start search for All Countries that start with that letter: ");
+        CountryProcessor countryProcessor = new CountryProcessor();
+        Scanner scanner = new Scanner(System.in);
+        String letter = scanner.nextLine();
+        countryProcessor.printAllCountriesThatStartWith(letter);
+        System.out.println("===========================\n");
+
+
+    }
 
 
 }// end of Main class
